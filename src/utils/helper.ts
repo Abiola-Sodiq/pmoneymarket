@@ -2,6 +2,9 @@ import { FormProps } from "antd";
 
 export const routePath = {
   HOME: "/",
+  ABOUT_US: "/about-us",
+  FAQS: "/faqs",
+  CONTACT_US:"/contact-us"
 };
 
 export const formConfig: FormProps = {

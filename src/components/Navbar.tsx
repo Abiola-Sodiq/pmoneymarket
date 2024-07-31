@@ -3,17 +3,11 @@ import openMenu from "../assets/icons/menu.svg";
 import closeMenu from "../assets/icons/Close.svg";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { routePath } from "../utils/helper";
 
 const Navbar = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const scrollToElement = (id: string) => {
-    // Prevent the default anchor link behavior
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -21,7 +15,7 @@ const Navbar = () => {
 
   return (
     <div className="rounded-[8px] bg-[#FFFFFF] px-4 md:px-8 w-full flex items-center justify-between">
-      <img src={logo} alt="logo" className="md:w-20 md:h-20 h-10 w-10" />
+      <img src={logo} alt="logo" className="w-10 h-10 md:w-20 md:h-20" />
       <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? (
           <img src={closeMenu} alt="Close" className="w-8 h-8" />
@@ -38,11 +32,7 @@ const Navbar = () => {
       >
         <li>
           <Link
-            to="/"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToElement("home");
-            }}
+            to={routePath.HOME}
             className={`font-sora md:text-lg text-sm font-medium text-[#18373e] ${
               isActive("/")
                 ? "text-[#4a9db0] border-b-2 border-b-[#255059]"
@@ -55,13 +45,9 @@ const Navbar = () => {
 
         <li>
           <Link
-            to="/"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToElement("about");
-            }}
+            to={routePath.ABOUT_US}
             className={`font-sora text-sm md:text-lg font-medium text-[#18373e] ${
-              isActive("/faqs")
+              isActive("/about-us")
                 ? "text-[#4a9db0] border-b-2 border-b-[#255059]"
                 : ""
             }`}
@@ -71,11 +57,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link
-            to="/"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToElement("faqs");
-            }}
+            to={routePath.FAQS}
             className={`font-sora text-sm md:text-lg font-medium text-[#18373e] ${
               isActive("/faqs")
                 ? "text-[#4a9db0] border-b-2 border-b-[#255059]"
@@ -87,13 +69,9 @@ const Navbar = () => {
         </li>
         <li>
           <Link
-            to="/"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToElement("contact-us");
-            }}
+            to={routePath.CONTACT_US}
             className={`font-sora text-sm md:text-lg font-medium text-[#18373e] ${
-              isActive("/faqs")
+              isActive("/contact-us")
                 ? "text-[#4a9db0] border-b-2 border-b-[#255059]"
                 : ""
             }`}

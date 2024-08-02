@@ -2,8 +2,8 @@ import logo from "../assets/icons/name-logo.svg";
 import openMenu from "../assets/icons/menu.svg";
 import closeMenu from "../assets/icons/Close.svg";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { routePath } from "../utils/helper";
+import { useLocation } from "react-router-dom";
+// import { routePath } from "../utils/helper";
 
 const Navbar = () => {
   const location = useLocation();
@@ -12,6 +12,9 @@ const Navbar = () => {
   const isActive = (path: string) => {
     return location.pathname === path;
   };
+  const phoneNumber = "27678417847";
+  const message = encodeURIComponent("I want to trade with you");
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
 
   return (
     <div className="rounded-[8px] bg-[#FFFFFF] px-4 md:px-8 w-full flex items-center justify-between">
@@ -30,7 +33,7 @@ const Navbar = () => {
             : "hidden"
         } md:w-auto md:flex md:flex-row md:gap-12 md:items-center md:static md:bg-transparent transition-all duration-300 ease-in-out`}
       >
-        <li>
+        {/* <li>
           <Link
             to={routePath.HOME}
             className={`font-sora md:text-lg text-sm font-medium text-[#18373e] ${
@@ -66,10 +69,12 @@ const Navbar = () => {
           >
             FAQs
           </Link>
-        </li>
+        </li> */}
         <li>
-          <Link
-            to={routePath.CONTACT_US}
+          <a
+            href={whatsappURL}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`font-sora text-sm md:text-lg font-medium text-[#18373e] ${
               isActive("/contact-us")
                 ? "text-[#4a9db0] border-b-2 border-b-[#255059]"
@@ -77,7 +82,7 @@ const Navbar = () => {
             }`}
           >
             Contact us
-          </Link>
+          </a>
         </li>
       </ul>
     </div>

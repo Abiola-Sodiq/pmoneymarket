@@ -6,7 +6,6 @@ const AboutUs = () => {
       <Navbar />
       <div className="flex items-center justify-center h-[80svh]">
         <div className="">
-            
         </div>
       </div>
     </div>

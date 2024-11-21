@@ -9,7 +9,7 @@ const Home = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="relative bg-cover bg-center h-[100vh] w-full"
+      className="relative bg-cover bg-center min-h-[100vh] w-full"
     >
       <div className="bg-gradient-to-r from-[#1ea1def1] to-[#4dc7dcd6] absolute inset-0 p-4">
         <Navbar />

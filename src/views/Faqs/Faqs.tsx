@@ -6,33 +6,75 @@ import closeArrow from "../../assets/icons/closearrow.svg";
 interface Item {
   key: string;
   label: string;
-  content: string;
+  content: React.ReactNode;
 }
 
 const Items: Item[] = [
   {
     key: "1",
-    label: "How do I sign up?",
-    content:
-      "To sign up on our artisan platform, simply click the Get Started button on the homepage, fill in the required information, and follow the prompts to create your account.",
+    label: "What currencies do you accept?",
+    content: (
+      <ul className=" list-disc pl-4 font-medium text-sm space-y-2">
+        <li>All digital currencies</li>
+        <li>USD (US Dollar)</li>
+        <li>ZAR (South African Rand)</li>
+        <li> NGN (Nigerian Naira)</li>
+        <li>KES (Kenyan Shilling)</li>
+        <li>PayPal</li>
+      </ul>
+    ),
   },
   {
     key: "2",
-    label: "How do I verify my account?",
+    label: "How long does payment take?",
     content:
-      "Users can verify their account by clicking the verification link sent to their email, while artisans need to complete the account verification process by filling in essential details and submitting them for review before gaining approval.",
+      "Payments are processed instantly once your transaction is confirmed.",
   },
   {
     key: "3",
-    label: "How do I receive my payment?",
-    content:
-      "Artisans receive payment for completed jobs through our secure payment system, with funds deposited directly into their linked bank account or preferred payment method within a specified timeframe.",
+    label: "How does trading work?",
+    content: (
+      <ul className=" list-decimal pl-4 font-medium text-sm space-y-2">
+        <li>
+          Use our <span className="font-bold"> rate calculator </span> to check
+          the daily rates.
+        </li>
+        <li>
+          Locate our wallet and account details listed below the calculator.
+        </li>
+        <li>Send your payment and upload proof of payment.</li>
+        <li>
+          Provide the account details where you'd like to receive your funds.
+        </li>
+      </ul>
+    ),
   },
   {
     key: "4",
-    label: "How do I make payment?",
-    content:
-      "Users can make payments for initiated jobs on our platform securely through the integrated payment system using various methods, such as credit/debit cards or other supported payment options.",
+    label: "Are there any bank charges?",
+    content: (
+      <ul className=" list-disc pl-4 font-medium text-sm space-y-2">
+        <li> Transfers to FNB accounts: Free</li>
+        <li>FNB eWallet: R50 fee</li>
+        <li> Immediate payments to other South African banks: R40 fee</li>
+        <li>All Naira payments: Free</li>
+      </ul>
+    ),
+  },
+  {
+    key: "5",
+    label: "Is there a trading limit? ",
+    content: (
+      <p>
+        There is no trading limit! You can trade any amount.
+        <span className=" font-bold"> Terms and conditions apply.</span>
+      </p>
+    ),
+  },
+  {
+    key: "6",
+    label: "What are your trading hours?",
+    content: "We operate 24/7 for your convenience.",
   },
 ];
 
@@ -40,7 +82,7 @@ const Faqs = () => {
   const [openKey, setOpenKey] = useState<string | null>(null);
 
   return (
-    <div className="bg-gradient-to-r from-[#1790c8c7] to-[#4dc6dc] h-[100svh] w-full p-4">
+    <div className="bg-gradient-to-r from-[#1790c8c7] to-[#4dc6dc] w-full p-4 min-h-[100svh]">
       <Navbar />
       <div className="w-full mx-auto py-5">
         <p className="text-[--primary70] md:text-3xl text-center whitespace-nowrap font-bold w-full max-w-[453px] text-lg py-5 mx-auto">
@@ -52,7 +94,7 @@ const Faqs = () => {
               key={item.key}
               className={`w-full max-w-[650px] mx-auto bg-white md:rounded-[18px] md:px-6 md:py-7 p-3 rounded-md shadow-md ${
                 openKey === item.key
-                  ? "border-2 border-[--primary70] shadow-[#4A3AFF30] transition-all"
+                  ? "border-2 border-[#4fcaffd4] shadow-[#4A3AFF30] transition-all"
                   : "shadow-[#080F340F]"
               }`}
             >
@@ -80,7 +122,7 @@ const Faqs = () => {
                 </button>
               </span>
               {openKey === item.key && (
-                <p className="text-[#000000B2] md:text-base font-normal pt-4 max-w-[500px] w-full text-sm">
+                <p className="text-[#000000B2] md:text-base font-medium pt-4 max-w-[600px] w-full text-sm">
                   {item.content}
                 </p>
               )}

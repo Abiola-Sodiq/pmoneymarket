@@ -15,7 +15,9 @@ const Navbar = () => {
 
   return (
     <div className="rounded-[8px] bg-[#FFFFFF] px-4 md:px-8 w-full flex items-center justify-between">
-      <img src={logo} alt="logo" className="w-10 h-10 md:w-20 md:h-20" />
+      <Link to={routePath.HOME}>
+        <img src={logo} alt="logo" className="w-10 h-10 md:w-20 md:h-20" />
+      </Link>
       <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? (
           <img src={closeMenu} alt="Close" className="w-8 h-8" />

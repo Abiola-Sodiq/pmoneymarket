@@ -1,12 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Select } from "antd";
+import { useEffect, useState } from "react";
+import supabase from "../../../config/supabaseClient";
 
 const Calculator = () => {
+  const [currency, setcurrency] = useState<any[] | null>();
+
+  useEffect(() => {
+    const fetchcurrencies = async () => {
+      const { data, error } = await supabase.from("currencyRates").select();
+
+      if (error) {
+        console.log(error);
+      }
+      if (data) {
+        setcurrency(data);
+      }
+    };
+
+    fetchcurrencies();
+  }, []);
+  console.log(currency);
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-gray-500 p-5 w-full mx-auto max-w-[500px] text-center space-y-5">
       <p>Know Wetin Your Money Go Be</p>
       <Form
-        onFinish={(values) => {
-          console.log(values); // You'll now get the form data here
+        onFinish={(e) => {
+          console.log(e);
         }}
         className=""
       >
@@ -55,7 +75,6 @@ const Calculator = () => {
           Convert
         </button>
       </Form>
-      
     </div>
   );
 };

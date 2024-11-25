@@ -27,7 +27,7 @@ const ContactUs = () => {
             We look forward to hear from you Today.
           </p>
         </div>
-        <div className="bg-[#f3f5f69d] py-3 rounded-2xl w-full  px-10">
+        <div className="bg-[#f3f5f69d] py-3 rounded-2xl w-full px-10">
           <h1 className="flex justify-center mb-4 text-xl font-bold md:my-7 md:text-2xl md:justify-start ">
             Leave us a message
           </h1>

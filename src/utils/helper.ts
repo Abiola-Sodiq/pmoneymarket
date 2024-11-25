@@ -4,7 +4,9 @@ export const routePath = {
   HOME: "/",
   ABOUT_US: "/about-us",
   FAQS: "/faqs",
-  CONTACT_US:"/contact-us"
+  CONTACT_US:"/contact-us",
+  LOGIN:"/admin-login",
+  DASHBOARD: "/admin-dashboard"
 };
 
 export const formConfig: FormProps = {

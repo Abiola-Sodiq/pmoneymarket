@@ -1,7 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { routePath } from "../utils/helper";
-import { AboutUs, ContactUs, Faqs, Home } from "./dynamicImport";
+import {
+  AboutUs,
+  ContactUs,
+  Faqs,
+  Home,
+  Login,
+  Dashboard,
+} from "./dynamicImport";
 import Loader from "../components/Loader";
 
 export const router = createBrowserRouter([
@@ -21,5 +28,13 @@ export const router = createBrowserRouter([
   {
     Component: ContactUs,
     path: routePath.CONTACT_US,
+  },
+  {
+    Component: Login,
+    path: routePath.LOGIN,
+  },
+  {
+    Component: Dashboard,
+    path: routePath.DASHBOARD,
   },
 ]);

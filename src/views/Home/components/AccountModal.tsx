@@ -9,7 +9,7 @@ const AccountModal = () => {
       open={openModal}
       closeIcon
       onCancel={() => {
-        setOpenModal(!openModal);
+        setOpenModal(false);
       }}
     >
       <p>Total:</p>

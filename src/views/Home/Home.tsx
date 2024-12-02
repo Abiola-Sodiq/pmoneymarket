@@ -1,10 +1,8 @@
 import Navbar from "../../components/Navbar";
 import Image from "../../assets/images/heroImage.svg";
 import Calculator from "./components/Calculator";
-import supabase from "../../config/supabaseClient";
 
 const Home = () => {
-  console.log(supabase);
   return (
     <div
       style={{

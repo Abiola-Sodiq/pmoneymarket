@@ -1,24 +1,32 @@
 import { Modal } from "antd";
-import { useState } from "react";
 
-const AccountModal = () => {
-  const [openModal, setOpenModal] = useState<boolean>();
+const AccountModal = ({
+  openAccountModal,
+  setOpenAccountModal,
+  amountToPay,
+}: {
+  openAccountModal: boolean;
+  setOpenAccountModal: (open: boolean) => void;
+  amountToPay: number;
+}) => {
   return (
     <Modal
-      closable
-      open={openModal}
-      closeIcon
-      onCancel={() => {
-        setOpenModal(false);
-      }}
+      open={openAccountModal}
+      onCancel={() => setOpenAccountModal(false)}
+      footer={null}
+      centered
     >
-      <p>Total:</p>
-
+      <div className="flex items-center gap-2 justify-center">
+        <p className=" font-medium text-sm md:text-lg">Amount to pay:</p>
+        <p className=" text-center text-base md:text-2xl font-bold">
+          ${amountToPay.toFixed(2)}
+        </p>
+      </div>
       <button
-        type="submit"
-        className="bg-[#1790c8c7] px-7 py-3 text-white font-semibold text-base rounded-xl hover:bg-[#1790c8c7]"
+        type="button"
+        className="bg-[#1790c8c7] px-5 py-2 text-white font-semibold text-base rounded-xl hover:bg-[#1790c8c7]"
       >
-        Trade
+        I've sent the money
       </button>
     </Modal>
   );

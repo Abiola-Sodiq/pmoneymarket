@@ -2,6 +2,7 @@
 import { Form, Select, Spin, Input, message } from "antd";
 import useCurrencies from "../../../hooks/useFetchCurrencies";
 import { useState } from "react";
+import AccountModal from "./AccountModal";
 
 type curencyType = {
   id: number;
@@ -13,8 +14,9 @@ type curencyType = {
 
 const Calculator = () => {
   const { currencies, loading, error } = useCurrencies();
-  // const [openAccountModal, setOpenAccountModal] = useState<boolean>(false);
+  const [openAccountModal, setOpenAccountModal] = useState<boolean>(false);
   const [convertedAmount, setConvertedAmount] = useState<number | null>(null);
+  const [inputtedAmount, setInputtedAmount] = useState<number | null>(null);
 
   if (error) {
     return <p>Error loading currencies</p>;
@@ -29,8 +31,8 @@ const Calculator = () => {
       message.error("Currency not found");
       return;
     }
-
     const amount = parseFloat(values.amount);
+    setInputtedAmount(amount);
     const result = amount * selectedCurrency.rate;
     setConvertedAmount(result);
   };
@@ -77,14 +79,30 @@ const Calculator = () => {
               )}`}</p>
             )}
           </div>
-          <button
-            type="submit"
-            className="bg-[#1790c8c7] md:px-7 md:py-3 text-white font-semibold text-sm md:text-base rounded-xl hover:bg-[#1790c8c7] whitespace-nowrap px-4 py-2"
-          >
-            {convertedAmount ? "Continue with trade" : "Convert my amount"}
-          </button>
+          {!convertedAmount ? (
+            <button
+              type="submit"
+              className="bg-[#1790c8c7] md:px-7 md:py-3 text-white font-semibold text-sm md:text-base rounded-xl hover:bg-[#1790c8c7] whitespace-nowrap px-4 py-2"
+            >
+              Convert my amount
+            </button>
+          ) : (
+            <button
+              onClick={() => setOpenAccountModal(true)}
+              className="bg-[#1790c8c7] px-7 py-3 text-white font-semibold text-base rounded-xl hover:bg-[#1790c8] mt-4"
+            >
+              Continue with trade
+            </button>
+          )}
         </Form>
       </Spin>
+      {openAccountModal && (
+        <AccountModal
+          openAccountModal={openAccountModal}
+          setOpenAccountModal={setOpenAccountModal}
+          amountToPay={inputtedAmount as number}
+        />
+      )}
     </div>
   );
 };

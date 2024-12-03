@@ -149,6 +149,7 @@ const TableData = () => {
           <button
             type="button"
             onClick={() => {
+              form.resetFields();
               setSelectedRecord(null);
               setOpenFormModal(true);
             }}

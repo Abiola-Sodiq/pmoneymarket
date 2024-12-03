@@ -34,7 +34,7 @@ const Calculator = () => {
 
     if (selectedCurrency) {
       setSelectedCurrency(selectedCurrency);
-      setConvertedAmount(null); // Reset converted amount when currency changes
+      setConvertedAmount(null); 
     }
   };
 
@@ -50,23 +50,7 @@ const Calculator = () => {
     const result = amount * selectedCurrency.rate;
     setConvertedAmount(result);
   };
-  // const handleConversion = (values: any) => {
-  //   const selectedCurrency = currencies.find(
-  //     (currency: CurrencyType) => currency.id === values.currency
-  //   );
 
-  //   if (!selectedCurrency) {
-  //     message.error("Currency not found");
-  //     return;
-  //   }
-
-  //   const amount = parseFloat(values.amount);
-  //   setInputtedAmount(amount);
-  //   setSelectedCurrency(selectedCurrency);
-
-  //   const result = amount * selectedCurrency.rate;
-  //   setConvertedAmount(result);
-  // };
 
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-gray-500 p-2 sm:p-5 w-full max-w-[500px] text-center space-y-5 mx-auto">

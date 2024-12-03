@@ -4,11 +4,13 @@ import useCurrencies from "../../../hooks/useFetchCurrencies";
 import { useState } from "react";
 import AccountModal from "./AccountModal";
 
-type curencyType = {
+type CurrencyType = {
   id: number;
   created_at: string;
   currencyA: string;
   currencyB: string;
+  currencyASymbol: string;
+  currencyBSymbol: string;
   rate: number;
 };
 
@@ -17,31 +19,60 @@ const Calculator = () => {
   const [openAccountModal, setOpenAccountModal] = useState<boolean>(false);
   const [convertedAmount, setConvertedAmount] = useState<number | null>(null);
   const [inputtedAmount, setInputtedAmount] = useState<number | null>(null);
+  const [selectedCurrency, setSelectedCurrency] = useState<CurrencyType | null>(
+    null
+  );
 
   if (error) {
     return <p>Error loading currencies</p>;
   }
 
-  const handleConversion = (values: any) => {
+  const handleCurrencyChange = (currencyId: number) => {
     const selectedCurrency = currencies.find(
-      (currency: curencyType) => currency.id === values.fromCurrency
+      (currency: CurrencyType) => currency.id === currencyId
     );
 
+    if (selectedCurrency) {
+      setSelectedCurrency(selectedCurrency);
+      setConvertedAmount(null); // Reset converted amount when currency changes
+    }
+  };
+
+  const handleConversion = (values: any) => {
     if (!selectedCurrency) {
       message.error("Currency not found");
       return;
     }
+
     const amount = parseFloat(values.amount);
     setInputtedAmount(amount);
+
     const result = amount * selectedCurrency.rate;
     setConvertedAmount(result);
   };
+  // const handleConversion = (values: any) => {
+  //   const selectedCurrency = currencies.find(
+  //     (currency: CurrencyType) => currency.id === values.currency
+  //   );
+
+  //   if (!selectedCurrency) {
+  //     message.error("Currency not found");
+  //     return;
+  //   }
+
+  //   const amount = parseFloat(values.amount);
+  //   setInputtedAmount(amount);
+  //   setSelectedCurrency(selectedCurrency);
+
+  //   const result = amount * selectedCurrency.rate;
+  //   setConvertedAmount(result);
+  // };
 
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-gray-500 p-2 sm:p-5 w-full max-w-[500px] text-center space-y-5 mx-auto">
       <p>Know Wetin Your Money Go Be</p>
       <Spin spinning={loading}>
-        <Form onFinish={handleConversion} className=" mx-auto">
+        <Form onFinish={handleConversion} className="mx-auto">
           <Form.Item
             name="amount"
             rules={[
@@ -58,27 +89,36 @@ const Calculator = () => {
             />
           </Form.Item>
 
-          <div className=" w-full  max-w-[400px] mx-auto">
+          <div className="w-full max-w-[400px] mx-auto">
             <Form.Item
-              name="fromCurrency"
+              name="currency"
               rules={[{ required: true, message: "Please select a currency" }]}
             >
-              <Select placeholder="Select Currency" className=" text-lg">
-                {currencies.map((currency: curencyType) => (
+              <Select
+                placeholder="Select Currency"
+                className="text-lg"
+                onChange={handleCurrencyChange}
+              >
+                {currencies.map((currency: CurrencyType) => (
                   <Select.Option key={currency.id} value={currency.id}>
                     {`${currency.currencyA} to ${currency.currencyB}`}
                   </Select.Option>
                 ))}
               </Select>
             </Form.Item>
+
+            <div className="flex items-center justify-center">
+              {convertedAmount !== null && selectedCurrency && (
+                <p className="text-lg font-semibold font-sora md:py-4 py-2 flex items-center gap-2">
+                  <p className="font-normal text-base">Your Amount is </p>
+                  {`${
+                    selectedCurrency.currencyBSymbol
+                  } ${convertedAmount.toFixed(2)}`}
+                </p>
+              )}
+            </div>
           </div>
-          <div className=" flex items-center justify-center">
-            {convertedAmount !== null && (
-              <p className="text-lg font-semibold font-sora md:py-4 py-2">{`Your Amount is ${convertedAmount.toFixed(
-                2
-              )}`}</p>
-            )}
-          </div>
+
           {!convertedAmount ? (
             <button
               type="submit"
@@ -96,11 +136,12 @@ const Calculator = () => {
           )}
         </Form>
       </Spin>
-      {openAccountModal && (
+      {openAccountModal && selectedCurrency && (
         <AccountModal
           openAccountModal={openAccountModal}
           setOpenAccountModal={setOpenAccountModal}
           amountToPay={inputtedAmount as number}
+          currencyASymbol={selectedCurrency.currencyASymbol as string}
         />
       )}
     </div>

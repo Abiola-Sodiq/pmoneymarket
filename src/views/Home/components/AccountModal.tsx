@@ -4,10 +4,12 @@ const AccountModal = ({
   openAccountModal,
   setOpenAccountModal,
   amountToPay,
+  currencyASymbol,
 }: {
   openAccountModal: boolean;
   setOpenAccountModal: (open: boolean) => void;
   amountToPay: number;
+  currencyASymbol: string
 }) => {
   return (
     <Modal
@@ -19,7 +21,7 @@ const AccountModal = ({
       <div className="flex items-center gap-2 justify-center">
         <p className=" font-medium text-sm md:text-lg">Amount to pay:</p>
         <p className=" text-center text-base md:text-2xl font-bold">
-          ${amountToPay.toFixed(2)}
+          {`${currencyASymbol}${amountToPay.toFixed(2)}`}
         </p>
       </div>
       <button

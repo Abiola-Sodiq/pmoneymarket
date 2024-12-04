@@ -6,28 +6,26 @@ import { useState } from "react";
 import supabase from "../../config/supabaseClient";
 import useCurrencies from "../../hooks/useFetchCurrencies";
 
+type CurrencyType = {
+  id?: number;
+  currencyA: string;
+  currencyB: string;
+  currencyASymbol?: string;
+  currencyBSymbol?: string;
+  rate: number;
+};
+
 const TableData = () => {
   const [openFormModal, setOpenFormModal] = useState<boolean>(false);
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
-  const [selectedRecord, setSelectedRecord] = useState<{
-    id?: number;
-    currencyA: string;
-    currencyB: string;
-    currencyASymbol?: string;
-    currencyBSymbol?: string;
-    rate: number;
-  } | null>(null);
+  const [selectedRecord, setSelectedRecord] = useState<CurrencyType | null>(
+    null
+  );
 
   const { refetch, currencies, loading } = useCurrencies();
   const [form] = Form.useForm();
 
-  const handleSubmit = async (values: {
-    currencyA: string;
-    currencyB: string;
-    currencyASymbol: string;
-    currencyBSymbol: string;
-    rate: number;
-  }) => {
+  const handleSubmit = async (values: CurrencyType) => {
     try {
       if (selectedRecord?.id) {
         const { error } = await supabase
@@ -44,22 +42,16 @@ const TableData = () => {
       refetch();
       setOpenFormModal(false);
       setSelectedRecord(null);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       message.error(`An error occurred: ${err.message}`);
     }
   };
 
-  const handleEdit = (record: {
-    id: number;
-    currencyA: string;
-    currencyB: string;
-    currencyASymbol: string;
-    currencyBSymbol: string;
-    rate: number;
-  }) => {
+  const handleEdit = (record: CurrencyType) => {
     setSelectedRecord(record);
-    setOpenFormModal(true);
     form.setFieldsValue(record);
+    setOpenFormModal(true);
   };
 
   const handleDelete = async (id: number) => {
@@ -104,6 +96,7 @@ const TableData = () => {
       key: "action",
       title: "Action",
       render: (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         _: any,
         record: {
           id: number;
@@ -149,8 +142,8 @@ const TableData = () => {
           <button
             type="button"
             onClick={() => {
-              form.resetFields();
               setSelectedRecord(null);
+              form.resetFields();
               setOpenFormModal(true);
             }}
             className="bg-[#1790c8c7] px-3 py-2 text-white font-semibold text-base rounded-xl hover:bg-[#1790c8c7] flex items-center gap-2"
@@ -170,22 +163,12 @@ const TableData = () => {
         }}
         footer={false}
         centered
-        maskClosable={false}
       >
         <Form
           form={form}
           layout="vertical"
           className="space-y-2 w-full px-6"
           onFinish={handleSubmit}
-          initialValues={
-            selectedRecord || {
-              currencyA: "",
-              currencyB: "",
-              currencyASymbol: "",
-              currencyBSymbol: "",
-              rate: null,
-            }
-          }
         >
           <div>
             <div className="flex items-center justify-between">

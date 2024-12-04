@@ -8,6 +8,8 @@ import {
   Home,
   Login,
   Dashboard,
+  Currency,
+  Account,
 } from "./dynamicImport";
 import Loader from "../components/Loader";
 
@@ -36,5 +38,15 @@ export const router = createBrowserRouter([
   {
     Component: Dashboard,
     path: routePath.DASHBOARD,
+    children: [
+      {
+        Component: Currency,
+        path: routePath.CURRENCY,
+      },
+      {
+        Component: Account,
+        path: routePath.ACCOUNT,
+      },
+    ],
   },
 ]);

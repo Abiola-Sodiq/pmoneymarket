@@ -6,7 +6,9 @@ export const routePath = {
   FAQS: "/faqs",
   CONTACT_US:"/contact-us",
   LOGIN:"/admin-login",
-  DASHBOARD: "/admin-dashboard"
+  DASHBOARD: "/admin-dashboard",
+  CURRENCY: "/admin-dashboard/currency",
+  ACCOUNT: "/admin-dashboard/account"
 };
 
 export const formConfig: FormProps = {

@@ -1,7 +1,6 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { routePath } from "../../utils/helper";
-import TableData from "./TableData";
-import logoutIcon from "../../assets/icons/logoutIcon.svg"
+import logoutIcon from "../../assets/icons/logoutIcon.svg";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -23,8 +22,25 @@ const Dashboard = () => {
         </span>
       </div>
 
-      <div className="flex items-center justify-center">
-        <TableData />
+      <div className="flex items-center justify-center flex-col">
+        <div className="flex items-center justify-center gap-10">
+          <button
+            onClick={() => navigate(routePath.CURRENCY)}
+            className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600 font-semibold hover:scale-105 transition-all"
+          >
+            CURRENCY UPDATE
+          </button>
+          <button
+            onClick={() => navigate(routePath.ACCOUNT)}
+            className="bg-blue-500 text-white px-6 py-3  rounded-lg shadow hover:bg-blue-600 font-semibold hover:scale-105 transition-all"
+          >
+            ACCOUNT UPDATE
+          </button>
+        </div>
+
+        <div className="mt-8">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

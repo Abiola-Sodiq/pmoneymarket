@@ -85,7 +85,7 @@ const Calculator = () => {
               >
                 {currencies.map((currency: CurrencyType) => (
                   <Select.Option key={currency.id} value={currency.id}>
-                    {`${currency.currencyA} to ${currency.currencyB}`}
+                    {`${currency.currencyA.toUpperCase()} to ${currency.currencyB.toUpperCase()}`}
                   </Select.Option>
                 ))}
               </Select>

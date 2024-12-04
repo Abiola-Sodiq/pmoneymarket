@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar";
 import Image from "../../assets/images/contact-bg.png";
-import { Form } from "antd";
+// import { Form } from "antd";
 import IG from "../../assets/icons/igLogo.svg";
 import call from "../../assets/icons/phoneIcon.svg";
 import whatsapp from "../../assets/icons/whatsppLogo.svg";
@@ -27,12 +27,12 @@ const ContactUs = () => {
             We look forward to hear from you Today.
           </p>
         </div>
-        <div className="bg-[#f3f5f69d] py-3 rounded-2xl w-full px-10">
+        <div className=" py-3 rounded-2xl w-full px-10 max-w-[1440px] mx-auto">
           <h1 className="flex justify-center mb-4 text-xl font-bold md:my-7 md:text-2xl md:justify-start ">
             Leave us a message
           </h1>
           <div className="  flex justify-between flex-col md:flex-row gap-4 items-start ">
-            <div className="w-full max-w-[400px] mx-auto md:mx-0">
+            {/* <div className="w-full max-w-[400px] mx-auto md:mx-0">
               <Form layout="vertical" className=" space-y-2 w-full">
                 <Form.Item label="Name">
                   <input className=" border-b-[1.5px] border-[#1790c8c7] rounded-xl  focus:outline-none w-full border p-3 max-w-[400px] " />
@@ -53,7 +53,7 @@ const ContactUs = () => {
                   </button>
                 </div>
               </Form>
-            </div>
+            </div> */}
             <div className=" bg-[#1790c8c7] rounded-lg max-w-[500px]  flex flex-col p-2  md:p-8 w-full md:mt-9 gap-3 mx-auto md:mx-0 ">
               <p className="text-[#090909] font-bold text-lg md:text-start text-center ">
                 Contact Information{" "}

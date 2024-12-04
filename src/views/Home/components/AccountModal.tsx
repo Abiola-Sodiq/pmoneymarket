@@ -22,15 +22,26 @@ const AccountModal = ({
   currencyASymbol: string;
 }) => {
   const [copiedAccountId, setCopiedAccountId] = useState<number | null>(null);
+  const [copiedAccountDetails, setCopiedAccountDetails] = useState<
+    string | null
+  >(null);
   const { accounts, loading, error } = useFetchAccount();
   if (error) {
     return <p>Error loading Account Details</p>;
   }
+  const phoneNumber = "27678417847";
+  const message = encodeURIComponent(
+    `I just sent ${currencyASymbol}${amountToPay.toFixed(
+      2
+    )} to account Number ${copiedAccountDetails}`
+  );
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
 
   const handleCopy = async (acountNumber: string, id: number) => {
     try {
       await navigator.clipboard.writeText(acountNumber);
       setCopiedAccountId(id);
+      setCopiedAccountDetails(acountNumber);
       setTimeout(() => setCopiedAccountId(null), 10000);
     } catch (error) {
       console.error("Failed to copy: ", error);
@@ -108,6 +119,7 @@ const AccountModal = ({
         <button
           type="button"
           className="bg-[#1790c8c7] px-5 py-2 text-white font-semibold text-base rounded-xl hover:bg-[#1790c8c7]"
+          onClick={() => window.open(whatsappURL, "_blank")}
         >
           I've sent the money
         </button>

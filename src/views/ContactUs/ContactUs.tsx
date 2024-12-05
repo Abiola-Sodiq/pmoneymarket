@@ -19,7 +19,7 @@ const ContactUs = () => {
     >
       <div className=" bg-gradient-to-r from-[#1790c8c7] to-[#4dc6dc] min-h-[100svh] w-full p-4">
         <Navbar />
-        <div className="  w-full text-center space-y-6 py-5">
+        <div className="  w-full text-center space-y-5 py-5">
           <p className="text-[--primary70] md:text-3xl text-center whitespace-nowrap font-bold w-full max-w-[453px] text-lg  mx-auto">
             Reach out to us !
           </p>

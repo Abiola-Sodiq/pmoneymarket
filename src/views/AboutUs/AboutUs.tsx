@@ -44,8 +44,8 @@ const AboutUs = () => {
             secure transactions for business, travel, or investment.
           </span>
         </div>
-        <div className="   rounded-xl flex text-center justify-center p-3 flex-col sm:flex-row">
-          <div className=" w-full mx-auto max-w-[450px] ">
+        <div className="  rounded-xl flex text-center justify-center p-3 flex-col sm:flex-row gap-10 ">
+          <div className=" w-full mx-auto max-w-[450px] space-y-2 ">
             <p className="text-[--primary70] md:text-xl text-center font-bold w-full text-lg mx-auto">
               Our Mission
             </p>
@@ -55,7 +55,7 @@ const AboutUs = () => {
               effortlessly.
             </p>
           </div>
-          <div className="  w-full mx-auto max-w-[450px]">
+          <div className="  w-full mx-auto max-w-[450px] space-y-2">
             <p className="text-[--primary70] md:text-xl text-center  font-bold w-full text-lg mx-auto">
               Our Vision
             </p>
